@@ -63,7 +63,7 @@ export const tickMultiFormat = d3.time.format.multi([
   ],  // fall back on month, year
 ]);
 export const formatDate = function (dttm) {
-  const d = UTC(new Date(dttm));
+  const d = new Date(dttm);
   return tickMultiFormat(d);
 };
 
@@ -74,7 +74,7 @@ export const formatDateThunk = function (format) {
 
   const formatter = d3.time.format(format);
   return (dttm) => {
-    const d = UTC(new Date(dttm));
+    const d = new Date(dttm);
     return formatter(d);
   };
 };
@@ -82,31 +82,28 @@ export const formatDateThunk = function (format) {
 export const fDuration = function (t1, t2, format = 'HH:mm:ss.SS') {
   const diffSec = t2 - t1;
   const duration = moment(new Date(diffSec));
-  return duration.utc().format(format);
+  return duration.format(format);
 };
 
 export const now = function () {
   // seconds from EPOCH as a float
-  return moment().utc().valueOf();
+  return moment().valueOf();
 };
 
 export const epochTimeXHoursAgo = function (h) {
   return moment()
     .subtract(h, 'hours')
-    .utc()
     .valueOf();
 };
 
 export const epochTimeXDaysAgo = function (d) {
   return moment()
     .subtract(d, 'days')
-    .utc()
     .valueOf();
 };
 
 export const epochTimeXYearsAgo = function (y) {
   return moment()
     .subtract(y, 'years')
-    .utc()
     .valueOf();
 };

@@ -21,7 +21,7 @@ export const d3TimeFormatPreset = function (format) {
   }
   const f = d3.time.format(effFormat);
   return function (dttm) {
-    const d = UTC(new Date(dttm));
+    const d = new Date(dttm);
     return f(d);
   };
 };
